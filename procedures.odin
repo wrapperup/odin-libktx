@@ -120,6 +120,13 @@ Texture_WriteToStream :: proc(This: ^Texture, dststr: ^Stream) -> error_code {
 	return This.vtbl.WriteToStream(This, dststr)
 }
 
+Texture_GetImageOffset :: proc(This: ^Texture, level: u32, layer: u32, faceSlice: u32, pOffset: ^c.size_t) -> error_code {
+	return This.vtbl.GetImageOffset(This, level, layer, faceSlice, pOffset)
+}
+Texture_GetImageSize :: proc(This: ^Texture, level: u32) -> c.size_t {
+	return This.vtbl.GetImageSize(This, level)
+}
+
 VulkanTexture_subAllocatorAllocMemFuncPtr :: proc "c" (
 	allocInfo: ^vk.MemoryAllocateInfo,
 	memReg: ^vk.MemoryRequirements,
